@@ -6,7 +6,7 @@ import { CiLogout, CiUser} from 'react-icons/ci';
 import { useAuth0 } from "@auth0/auth0-react"
 import {Link} from 'react-router-dom';
 import './nav.css'
-const Nav = ({search, setSearch, searchproduct}) => {
+const Nav = ({search, setSearch, searchProduct}) => {
   const { loginWithRedirect, logout, user, isAuthenticated} = useAuth0();
   return (
     <>
@@ -25,7 +25,7 @@ const Nav = ({search, setSearch, searchproduct}) => {
           </div>
           <div className='search_box'>
             <input type='text' value={search} placeholder='searh' onChange={(e) => setSearch(e.target.value)}></input>
-            <button onClick={searchproduct}><AiOutlineSearch /></button>
+            <button onClick={searchProduct}><AiOutlineSearch /></button>
           </div>
           {
             isAuthenticated ? 
