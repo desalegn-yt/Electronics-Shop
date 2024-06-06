@@ -1,10 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './shop.css'
 import { AiFillHeart, AiFillEye, AiOutlineClose} from 'react-icons/ai';
 
 const Shop = ({shop, Filter, allCateFilter, addToCart}) => {
+  const [showDetail, setShowDetail] = useState(false)
+  const [detail, setDetail] = useState()
+  const detailView = (prod) =>{
+    setDetail(prod)
+  setShowDetail(true)
+  }
+  const closeDetail = () =>{
+    setShowDetail(false)
+    }
   return (
-    <>
+    <> 
+       {
+      showDetail ? 
+      <>
+      <div className='product_detail'>
+          <button className='close_btn' onClick={() => closeDetail()}><AiOutlineClose /></button>
+          <div className='container'>
+              <div className='img_box'>
+                  <img src={detail.image} alt=''></img>
+              </div>
+              <div className='info'>
+                  <h4># {detail.cat}</h4>
+                  <h2>{detail.Name}</h2>
+                  <p>A Searchcreen Everyone Will Love: Whether your family is streaming or video chatting with friends tablet A8...</p>
+                  <h3>${detail.price}</h3>
+                  <button onClick={() => addToCart (detail)}>Add To Cart</button>
+              </div>
+          </div>
+      </div>
+      </>
+      : null
+  }
       <div className="shop">
         <h2># shop</h2>
         <p>Home . shop</p>
@@ -53,7 +83,7 @@ const Shop = ({shop, Filter, allCateFilter, addToCart}) => {
                               <AiFillHeart />
                             </li>
                             <li>
-                              <AiFillEye />
+                              <AiFillEye onClick={() => detailView(shopProd)}/>
                             </li>
                           </div>
                         </div>

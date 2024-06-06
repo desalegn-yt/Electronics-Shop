@@ -5,7 +5,7 @@ import {BiLogoFacebook, BiLogoTwitter, BiLogoInstagram, BiLogoYoutube} from "rea
 import { Link } from 'react-router-dom'
 import Homeproduct from './homeProduct'
 
-const Home = () => {
+const Home = ({addToCart}) => {
 const [trendingProduct, setTrendingProduct] = useState(Homeproduct)
 const [newProduct, setNewProduct] = useState([])
 const [topProduct, setTopProduct] = useState([])
@@ -13,10 +13,9 @@ const [featuredProduct, setFeaturedProduct] = useState([])
 const filterProduct = filterType =>{
     const prodResult = Homeproduct.filter(
         (prod) =>(
-             prod.type == filterType
+             prod.type === filterType
         )
     )
-
     setTrendingProduct(prodResult)
 } 
 const allTrandingProducts = ()=>{
@@ -24,30 +23,34 @@ const allTrandingProducts = ()=>{
 }
 
 useEffect(() => 
-{
-    productCategory()
-})
+  {
+      productCategory()
+  },[])
 
 const productCategory = () =>{
     const newProdResult = Homeproduct.filter(
         (prod) =>(
-             prod.type == 'new'
+             prod.type === 'new'
         )
     )
+    
+    setNewProduct(newProdResult)
     const topProdResult = Homeproduct.filter(
         (prod) =>(
-             prod.type == 'top'
+             prod.type === 'top'
         )
     )
+    
+    setTopProduct(topProdResult)
     const featuredProdResult = Homeproduct.filter(
         (prod) =>(
-             prod.type == 'featured'
+             prod.type === 'featured'
         )
     )
-    setNewProduct(newProdResult)
-    setTopProduct(topProdResult)
     setFeaturedProduct(featuredProdResult)
 }
+
+
   return (
     <>
       <div className="home">
@@ -78,12 +81,12 @@ const productCategory = () =>{
               </div>
               <div className="products">
                 <div className="container">
-                  {trendingProduct.map((curElm) => {
+                  {trendingProduct.map((homeProd) => {
                     return (
                       <>
                         <div className="box">
                           <div className="img_box">
-                            <img src={curElm.image} alt=""></img>
+                            <img src={homeProd.image} alt=""></img>
                             <div className="icon">
                               <div className="icon_box">
                                 <AiFillEye />
@@ -94,9 +97,9 @@ const productCategory = () =>{
                             </div>
                           </div>
                           <div className="info">
-                            <h3>{curElm.Name}</h3>
-                            <p>${curElm.price}</p>
-                            <button className="btn">Add to cart</button>
+                            <h3>{homeProd.Name}</h3>
+                            <p>${homeProd.price}</p>
+                            <button onClick={() => addToCart(homeProd)} className="btn">Add to cart</button>
                           </div>
                         </div>
                       </>
@@ -201,7 +204,7 @@ const productCategory = () =>{
                                 <div className='icon'>
                                   <button><AiFillEye /></button>
                                   <button><AiFillHeart /></button>
-                                  <button ><AiOutlineShoppingCart /></button>
+                                  <button onClick={() => addToCart(newProd)}><AiOutlineShoppingCart /></button>
                                 </div>
                               </div>
                             </div>
@@ -230,7 +233,7 @@ const productCategory = () =>{
                         <div className='icon'>
                           <button><AiFillEye /></button>
                           <button><AiFillHeart /></button>
-                          <button><AiOutlineShoppingCart /></button>
+                          <button onClick={() => addToCart(featuredProd)}><AiOutlineShoppingCart /></button>
                         </div>
                       </div>
                     </div>
@@ -258,7 +261,7 @@ const productCategory = () =>{
                         <div className='icon'>
                           <button><AiFillEye /></button>
                           <button><AiFillHeart /></button>
-                          <button ><AiOutlineShoppingCart /></button>
+                          <button onClick={() => addToCart(topProd)}><AiOutlineShoppingCart /></button>
                         </div>
                       </div>
                     </div>
