@@ -2,7 +2,7 @@
   "name": "work-wallet-shopping",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://desalegn-yt.github.io",
+  "homepage": "https://desalegn-yt.github.io/Electronics-Shop/",
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
     "@testing-library/jest-dom": "^5.17.0",
