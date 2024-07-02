@@ -9,7 +9,7 @@ const Rout = ({cart, shop, Filter, allCateFilter, addToCart , setCart}) => {
   return (
     <>
     <Routes>
-<Route path='home' element={<Home  addToCart = {addToCart} />}/>
+<Route path='/' element={<Home  addToCart = {addToCart} />}/>
 <Route path='shop' element={<Shop shop={shop} Filter = {Filter} allCateFilter = {allCateFilter} addToCart = {addToCart} />}/>
 <Route path='cart' element={<Cart cart={cart} setCart= {setCart}/>}/>
 <Route path='contact' element={<Contact />}/>
